@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E3B043A27BD25D100215F42 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B043927BD25D100215F42 /* Products.swift */; };
 		6ECA357C27BA9146009C894A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA357B27BA9146009C894A /* AppDelegate.swift */; };
 		6ECA357E27BA9146009C894A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA357D27BA9146009C894A /* SceneDelegate.swift */; };
 		6ECA358027BA9146009C894A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA357F27BA9146009C894A /* ViewController.swift */; };
 		6ECA358327BA9146009C894A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECA358127BA9146009C894A /* Main.storyboard */; };
 		6ECA358527BA9148009C894A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ECA358427BA9148009C894A /* Assets.xcassets */; };
 		6ECA358827BA9148009C894A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECA358627BA9148009C894A /* LaunchScreen.storyboard */; };
+		6ECA359727BA97F6009C894A /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA359527BA97F6009C894A /* ProductCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E3B043927BD25D100215F42 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		6ECA357827BA9146009C894A /* AutoLayout-Scroll-task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AutoLayout-Scroll-task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ECA357B27BA9146009C894A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6ECA357D27BA9146009C894A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		6ECA358427BA9148009C894A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6ECA358727BA9148009C894A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6ECA358927BA9148009C894A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6ECA359527BA97F6009C894A /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E3B043827BD25BB00215F42 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6E3B043927BD25D100215F42 /* Products.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		6ECA356F27BA9146009C894A = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +68,8 @@
 		6ECA357A27BA9146009C894A /* AutoLayout-Scroll-task */ = {
 			isa = PBXGroup;
 			children = (
+				6E3B043827BD25BB00215F42 /* Models */,
+				6ECA359427BA97E2009C894A /* Cell */,
 				6ECA357B27BA9146009C894A /* AppDelegate.swift */,
 				6ECA357D27BA9146009C894A /* SceneDelegate.swift */,
 				6ECA357F27BA9146009C894A /* ViewController.swift */,
@@ -65,6 +79,14 @@
 				6ECA358927BA9148009C894A /* Info.plist */,
 			);
 			path = "AutoLayout-Scroll-task";
+			sourceTree = "<group>";
+		};
+		6ECA359427BA97E2009C894A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6ECA359527BA97F6009C894A /* ProductCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +161,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ECA358027BA9146009C894A /* ViewController.swift in Sources */,
+				6ECA359727BA97F6009C894A /* ProductCell.swift in Sources */,
+				6E3B043A27BD25D100215F42 /* Products.swift in Sources */,
 				6ECA357C27BA9146009C894A /* AppDelegate.swift in Sources */,
 				6ECA357E27BA9146009C894A /* SceneDelegate.swift in Sources */,
 			);
