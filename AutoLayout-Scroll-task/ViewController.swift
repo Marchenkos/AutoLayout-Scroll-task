@@ -1,7 +1,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let products = Products.getData()
+    let products = Product.getData()
     var tableContentObserver: NSKeyValueObservation?
 
     @IBOutlet var headerViewImage: UIImageView!
@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         static let maxHeaderHeight: CGFloat = 160
         static let minHeaderHeight: CGFloat = 60
         static let minImageAlpha: CGFloat = 0
-        static let maxImageAlpha: CGFloat = 0
+        static let maxImageAlpha: CGFloat = 1
         static let animationDuration: Double = 0.5
     }
         
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Constants.estimatedRowHeight
         
-        tableContentObserver = tableView.observe(\UITableView.contentOffset, options: .new) { (table, change) in
+        tableContentObserver = tableView.observe(\UITableView.contentOffset, options: .new) { (_, change) in
             guard let newCoordinate = change.newValue else {
                 return
             }
@@ -33,17 +33,16 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateHeaderViewHeight(_ scrollCoordinate: CGFloat) -> Void {
+    func updateHeaderViewHeight(_ scrollCoordinate: CGFloat) {
         let newHeaderViewHeight: CGFloat = headerHeightConstraint.constant - scrollCoordinate
-        print(newHeaderViewHeight)
         
         UIView.animate(withDuration: Constants.animationDuration) {
             if newHeaderViewHeight > Constants.maxHeaderHeight {
                 self.headerHeightConstraint.constant = min(Constants.maxHeaderHeight, newHeaderViewHeight)
-                self.headerViewImage.alpha = Constants.maxImageAlpha;
+                self.headerViewImage.alpha = Constants.maxImageAlpha
             } else if newHeaderViewHeight < Constants.minHeaderHeight {
                 self.headerHeightConstraint.constant = Constants.minHeaderHeight
-                self.headerViewImage.alpha = Constants.minImageAlpha;
+                self.headerViewImage.alpha = Constants.minImageAlpha
 
             } else {
                 self.headerHeightConstraint.constant = newHeaderViewHeight
