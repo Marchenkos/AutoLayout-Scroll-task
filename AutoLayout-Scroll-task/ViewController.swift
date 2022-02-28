@@ -24,6 +24,10 @@ class ViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = Constants.estimatedRowHeight
         
+        headerViewImage.contentMode = .scaleAspectFill
+        headerViewImage.layer.cornerRadius = headerViewImage.frame.size.width / 2
+        headerViewImage.clipsToBounds = true
+
         tableContentObserver = tableView.observe(\UITableView.contentOffset, options: .new) { (_, change) in
             guard let newCoordinate = change.newValue else {
                 return
@@ -35,17 +39,22 @@ class ViewController: UIViewController {
     
     func updateHeaderViewHeight(_ scrollCoordinate: CGFloat) {
         let newHeaderViewHeight: CGFloat = headerHeightConstraint.constant - scrollCoordinate
-        
+            
         UIView.animate(withDuration: Constants.animationDuration) {
-            if newHeaderViewHeight > Constants.maxHeaderHeight {
+            if newHeaderViewHeight >= Constants.maxHeaderHeight {
                 self.headerHeightConstraint.constant = min(Constants.maxHeaderHeight, newHeaderViewHeight)
                 self.headerViewImage.alpha = Constants.maxImageAlpha
+                self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
+
             } else if newHeaderViewHeight < Constants.minHeaderHeight {
                 self.headerHeightConstraint.constant = Constants.minHeaderHeight
                 self.headerViewImage.alpha = Constants.minImageAlpha
+                self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
 
             } else {
                 self.headerHeightConstraint.constant = newHeaderViewHeight
+                self.headerViewImage.alpha = newHeaderViewHeight / Constants.maxHeaderHeight
+                self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
             }
     
             self.view.layoutIfNeeded()
