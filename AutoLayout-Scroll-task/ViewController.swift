@@ -27,37 +27,40 @@ class ViewController: UIViewController {
         headerViewImage.contentMode = .scaleAspectFill
         headerViewImage.layer.cornerRadius = headerViewImage.frame.size.width / 2
         headerViewImage.clipsToBounds = true
+        headerViewImage.layer.borderWidth = 1
+        headerViewImage.layer.borderColor = UIColor.white.cgColor
 
-        tableContentObserver = tableView.observe(\UITableView.contentOffset, options: .new) { (_, change) in
-            guard let newCoordinate = change.newValue else {
+        tableContentObserver = tableView.observe(\UITableView.contentOffset, options: [.old, .new]) { (_, change) in
+            guard let newCoordinate = change.newValue, let oldCoordinate = change.oldValue else {
                 return
             }
-
-            self.updateHeaderViewHeight(newCoordinate.y)
+            
+            if oldCoordinate.y != newCoordinate.y {
+                self.updateHeaderViewHeight(newCoordinate.y)
+            }
         }
     }
     
     func updateHeaderViewHeight(_ scrollCoordinate: CGFloat) {
         let newHeaderViewHeight: CGFloat = headerHeightConstraint.constant - scrollCoordinate
-            
-        UIView.animate(withDuration: Constants.animationDuration) {
-            if newHeaderViewHeight >= Constants.maxHeaderHeight {
-                self.headerHeightConstraint.constant = min(Constants.maxHeaderHeight, newHeaderViewHeight)
-                self.headerViewImage.alpha = Constants.maxImageAlpha
-                self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
 
-            } else if newHeaderViewHeight < Constants.minHeaderHeight {
-                self.headerHeightConstraint.constant = Constants.minHeaderHeight
+        if newHeaderViewHeight >= Constants.maxHeaderHeight {
+            self.headerHeightConstraint.constant = min(Constants.maxHeaderHeight, newHeaderViewHeight)
+            self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
+        } else if newHeaderViewHeight < Constants.minHeaderHeight {
+            self.headerHeightConstraint.constant = max(Constants.minHeaderHeight, newHeaderViewHeight)
+            self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
+        } else {
+            self.headerHeightConstraint.constant = newHeaderViewHeight
+            self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
+        }
+        
+        if newHeaderViewHeight >= Constants.maxHeaderHeight {
+                self.headerViewImage.alpha = Constants.maxHeaderHeight
+        } else if newHeaderViewHeight < Constants.minHeaderHeight + 20 {
                 self.headerViewImage.alpha = Constants.minImageAlpha
-                self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
-
-            } else {
-                self.headerHeightConstraint.constant = newHeaderViewHeight
-                self.headerViewImage.alpha = newHeaderViewHeight / Constants.maxHeaderHeight
-                self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
-            }
-    
-            self.view.layoutIfNeeded()
+        } else {
+            self.headerViewImage.alpha = newHeaderViewHeight/Constants.maxHeaderHeight
         }
     }
 }
