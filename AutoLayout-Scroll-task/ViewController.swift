@@ -46,17 +46,16 @@ class ViewController: UIViewController {
 
         if newHeaderViewHeight >= Constants.maxHeaderHeight {
             self.headerHeightConstraint.constant = min(Constants.maxHeaderHeight, newHeaderViewHeight)
-            self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
         } else if newHeaderViewHeight < Constants.minHeaderHeight {
             self.headerHeightConstraint.constant = max(Constants.minHeaderHeight, newHeaderViewHeight)
-            self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
         } else {
             self.headerHeightConstraint.constant = newHeaderViewHeight
-            self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
         }
         
+        self.headerViewImage.layer.cornerRadius = self.headerViewImage.frame.size.width / 2
+        
         if newHeaderViewHeight >= Constants.maxHeaderHeight {
-                self.headerViewImage.alpha = Constants.maxHeaderHeight
+                self.headerViewImage.alpha = Constants.maxImageAlpha
         } else if newHeaderViewHeight < Constants.minHeaderHeight + 20 {
                 self.headerViewImage.alpha = Constants.minImageAlpha
         } else {
